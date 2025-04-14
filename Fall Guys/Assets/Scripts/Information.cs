@@ -17,7 +17,6 @@ public class Information : MonoBehaviourPunCallbacks
 
     public void OnConnectRoom()
     {
-        
         PhotonNetwork.JoinRoom(roomName);
     }
 
