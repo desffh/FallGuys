@@ -22,6 +22,7 @@ public class Information : MonoBehaviourPunCallbacks
 
     public void View(string name, int currentPersonal, int maxPersonal)
     {
+        roomName = name;
         description.text = name + " (" + currentPersonal + " / " + maxPersonal + ")"; 
     }
 }

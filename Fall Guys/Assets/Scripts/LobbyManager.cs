@@ -4,7 +4,6 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] Dictionary<string, GameObject> dictionary 
@@ -82,10 +81,5 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 }
             }
         }
-        
-
-
     }
-
-
 }
