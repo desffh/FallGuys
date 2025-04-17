@@ -6,27 +6,35 @@ using Photon.Pun;
 
 public class CharacterManager : MonoBehaviour
 {
-    [SerializeField] List<Transform> list;
-
-    [SerializeField] List<Transform> transforms;
+    [SerializeField] List<Transform> transformList = new List<Transform>();
+    
 
     private void Awake()
     {
-        // 리스트의 크기를 최대 인원 수 제한만큼으로 설정
-        list = new List<Transform>(PhotonNetwork.CurrentRoom.MaxPlayers);
+        CreateTransform();    
         
     }
 
 
     private void Start()
-    {      
-        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+    {
+        int index = PhotonNetwork.CurrentRoom.PlayerCount - 1;
 
-        for(int i = PhotonNetwork.CurrentRoom.PlayerCount; i < PhotonNetwork.CurrentRoom.MaxPlayers; i++)
-        {        
-            transforms.Add(list[i]);
+        //Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);        
+        
+        // 방에 입장하면 Start() 실행 -> 캐릭터 생성
+        PhotonNetwork.Instantiate("Character", transformList[index].position, Quaternion.identity);
+    }
 
-            PhotonNetwork.Instantiate("Character", transforms[i].position, Quaternion.identity);
+    void CreateTransform()
+    {
+        // Resources폴더에서 지정해둔 위치값을 로드
+
+        for(int i = 0; i < PhotonNetwork.CurrentRoom.MaxPlayers; i++)
+        {
+            Transform clone = Instantiate(Resources.Load<Transform>("spawn" + i));
+
+            transformList.Add(clone);
         }
     }
 }
