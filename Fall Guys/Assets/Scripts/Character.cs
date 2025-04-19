@@ -5,6 +5,7 @@ using Photon.Pun;
 
 
 [RequireComponent(typeof(Rotation))]
+[RequireComponent(typeof(Mouse))]
 public class Character : MonoBehaviourPun
 {
     [SerializeField] Camera viewcamera;
@@ -20,6 +21,10 @@ public class Character : MonoBehaviourPun
     // |--------------------------------
 
     [SerializeField] Rotation rotation;
+
+    // |--------------------------------
+
+    [SerializeField] float gravity;
 
 
     private void Awake()
@@ -55,8 +60,6 @@ public class Character : MonoBehaviourPun
 
     public void Move()
     {
-        Vector3 modifiedTransform = 
-            transform.TransformDirection(direction * speed * Time.deltaTime);
 
         controller.Move(direction * Time.deltaTime * speed);
         
